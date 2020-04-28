@@ -6,6 +6,32 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="./css/reset.css">
 	<link rel="stylesheet" href="./css/style.css">
+	<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+	<script>
+		$(function(){
+			$.ajax({
+				type: "GET",
+				url: "./json/recipes.json",
+				dataType: "json",
+				success: function(data){
+					var rcp = data.recipes;
+					var output = "";
+					console.log(rcp[0].img)
+					output += "<li><img src='"+rcp[0].img+"'></li>"
+					output += "<li>"+rcp[0].name_kr+"</li>"
+					output += "<li>"+rcp[0].name_en+"</li>"
+					output += "<li>"+rcp[0].maker+"</li>"
+					output += "<li>"+rcp[0].material+"</li>"
+
+					$('.recipes ul').html(output);
+					
+				},
+				error: function(xhr, status, error){
+					alert("error")
+				}
+			});
+		});
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -45,6 +71,9 @@
 					<span>설정</span>
 				</li>
 			</ul>
+			<div class="recipes">
+				<ul></ul>
+			</div>
 		</div>	
 	</div>
 </body>
